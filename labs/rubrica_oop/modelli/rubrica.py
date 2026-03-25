@@ -18,8 +18,8 @@ PERCORSO DIDATTICO:
     - __getitem__  → rubrica["Mario"]
 """
 
-# from modelli import Contatto
-from contatto import Contatto
+from modelli import Contatto
+# from contatto import Contatto
 
 class Rubrica:
     """

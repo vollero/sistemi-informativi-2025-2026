@@ -1,0 +1,22 @@
+{
+  "Anna Bianchi": {
+    "telefoni": [
+      "0817766543"
+    ],
+    "email": [
+      "a.bianchi@email.it"
+    ],
+    "citta": "Napoli",
+    "gruppo": "lavoro"
+  },
+  "Anna Verdi": {
+    "telefoni": [
+      "02-9876543"
+    ],
+    "email": [
+      "anna@email.it"
+    ],
+    "citta": "Milano",
+    "gruppo": "amici"
+  }
+}

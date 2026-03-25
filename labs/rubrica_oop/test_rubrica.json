@@ -18,5 +18,23 @@
     ],
     "citta": "Milano",
     "gruppo": "amici"
+  },
+  "Marco Esposito": {
+    "telefoni": [
+      "+39 081 553 33 22"
+    ],
+    "email": [
+      "m.espo@bizmail.it"
+    ],
+    "citta": "Napoli",
+    "gruppo": "amici"
+  },
+  "Maria Massimi": {
+    "telefoni": [
+      "+39 06 7777 32 32"
+    ],
+    "email": [],
+    "citta": "Roma",
+    "gruppo": "generale"
   }
 }

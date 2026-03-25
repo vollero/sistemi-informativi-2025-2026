@@ -2,8 +2,8 @@
 persistenza/json_store.py — Persistenza su file JSON
 
 PERCORSO DIDATTICO:
-    Nella Lezione 4 procedurale, carica_rubrica() e salva_rubrica() erano
-    funzioni "sciolte". In questa versione OOP, la persistenza diventa
+    Nella lezione precedente procedurale, carica_rubrica() e salva_rubrica() 
+    erano funzioni "sciolte". In questa versione OOP, la persistenza diventa
     una CLASSE con una responsabilità ben definita.
 
     Principio: SEPARATION OF CONCERNS (Separazione delle responsabilità)

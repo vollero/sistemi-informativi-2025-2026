@@ -2,7 +2,7 @@
 modelli/contatto.py — La classe Contatto
 
 PERCORSO DIDATTICO:
-    Nella Lezione 3, un contatto era un dizionario "nudo":
+    Nella lezione precedente, un contatto era un dizionario "nudo":
         {"telefoni": [...], "email": [...], "citta": "Roma", "gruppo": "lavoro"}
 
     Problemi di questo approccio:

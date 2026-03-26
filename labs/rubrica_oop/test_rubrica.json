@@ -21,7 +21,8 @@
   },
   "Marco Esposito": {
     "telefoni": [
-      "+39 081 553 33 22"
+      "0815533322",
+      "0817766543"
     ],
     "email": [
       "m.espo@bizmail.it"
@@ -31,10 +32,18 @@
   },
   "Maria Massimi": {
     "telefoni": [
-      "+39 06 7777 32 32"
+      "77773232"
     ],
     "email": [],
     "citta": "Roma",
+    "gruppo": "generale"
+  },
+  "Mario Lenzini": {
+    "telefoni": [
+      "0665453663"
+    ],
+    "email": [],
+    "citta": "",
     "gruppo": "generale"
   }
 }

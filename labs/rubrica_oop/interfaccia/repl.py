@@ -59,10 +59,11 @@ class RubricaREPL:
             "3": ("Mostra rubrica", self._cmd_mostra_tutti),
             "4": ("Aggiorna contatto", self._cmd_aggiorna),
             "5": ("Elimina contatto", self._cmd_elimina),
-            "7": ("Filtra per gruppo", self._cmd_filtra_gruppo),
-            "6": ("Cerca per nome", self._cmd_cerca),
-            "8": ("Statistiche", self._cmd_statistiche),
-            "9": ("Salva su file", self._cmd_salva),
+            "6": ("Cerca per nome", self._cmd_cerca_per_nome),
+            "7": ("Cerca per numero", self._cmd_cerca_per_numero),
+            "8": ("Filtra per gruppo", self._cmd_filtra_gruppo),  
+            "9": ("Statistiche", self._cmd_statistiche),
+            "10": ("Salva su file", self._cmd_salva),
         }
 
     # ---------------------------------------------------------------
@@ -117,7 +118,7 @@ class RubricaREPL:
         print(f"\n{'─' * 44}")
         for codice, (etichetta, _) in sorted(self._comandi.items()):
             print(f"  {codice}. {etichetta}")
-        print(f"  0. Salva ed esci")
+        print(f"   0. Salva ed esci")
         print(f"{'─' * 44}")
 
     # ---------------------------------------------------------------
@@ -209,7 +210,7 @@ class RubricaREPL:
         else:
             print("  Annullato.")
 
-    def _cmd_cerca(self):
+    def _cmd_cerca_per_nome(self):
         """Comando: ricerca per nome parziale."""
         testo = input("  Testo da cercare: ").strip()
         risultati = self._rubrica.cerca(testo)
@@ -220,6 +221,20 @@ class RubricaREPL:
             for contatto in risultati:
                 print(contatto)
                 print()
+
+    def _cmd_cerca_per_numero(self):
+        """Comando: ricerca per numero esatto."""
+        numero = input("  Numero da cercare: ").strip()
+        risultati = self._rubrica.cerca_numero(numero)
+        if not risultati:
+            print(f"  Nessun contatto trovato per il numero {numero}.")
+        else:
+            print(f"  Trovati {len(risultati)} contatti:\n")
+            for contatto in risultati:
+                print(contatto)
+                print()
+
+
 
     def _cmd_filtra_gruppo(self):
         """Comando: filtra per gruppo."""

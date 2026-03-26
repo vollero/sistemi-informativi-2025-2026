@@ -21,6 +21,7 @@ PERCORSO DIDATTICO:
 from modelli import Contatto
 # from contatto import Contatto
 
+
 class Rubrica:
     """
     Collezione di contatti con interfaccia Pythonica.
@@ -111,6 +112,24 @@ class Rubrica:
         testo_lower = testo.lower()
         return [c for c in self._contatti.values() if testo_lower in c.nome.lower()]
 
+    def cerca_numero(self, numero):
+        
+        #
+        # Costruzione lista in modo esplicito
+        #
+        #lista_contatti_trovati = []
+        #
+        #for contatto in self:
+        #    if numero in contatto.telefoni:
+        #        lista_contatti_trovati.append(contatto)
+        #
+        #return lista_contatti_trovati
+
+        #
+        # Costruzione lista con list comprehension
+        #
+        return [c for c in self if numero in c.telefoni]
+
     def filtra_per_gruppo(self, gruppo):
         """Restituisce i contatti appartenenti a un dato gruppo."""
         return [c for c in self._contatti.values() if c.gruppo == gruppo]
@@ -145,7 +164,7 @@ class Rubrica:
             "media_telefoni": round(totale_tel / len(self), 2),
             "contatto_con_piu_numeri": contatto_max,
             "max_numeri": max_tel,
-            "distribuzione_gruppi": gruppi
+            "distribuzione_gruppi": gruppi,
         }
 
     # ---------------------------------------------------------------
@@ -260,9 +279,13 @@ if __name__ == "__main__":
     r = Rubrica()
 
     # Creazione contatti
-    r.aggiungi(Contatto("Mario Rossi", "06-1234567", "mario@email.it", "Roma", "lavoro"))
+    r.aggiungi(
+        Contatto("Mario Rossi", "06-1234567", "mario@email.it", "Roma", "lavoro")
+    )
     r.aggiungi(Contatto("Anna Verdi", "02-9876543", "anna@email.it", "Milano", "amici"))
-    r.aggiungi(Contatto("Luca Bianchi", "081-5551234", "luca@studio.it", "Napoli", "lavoro"))
+    r.aggiungi(
+        Contatto("Luca Bianchi", "081-5551234", "luca@studio.it", "Napoli", "lavoro")
+    )
 
     # Aggiungiamo numeri extra
     r.aggiungi_telefono("Mario Rossi", "333-1112233")
@@ -286,7 +309,7 @@ if __name__ == "__main__":
 
     # --- Ricerca ---
     print("\n--- Cerca 'Rossi' ---")
-    for c in r.cerca("Rossi"):
+    for c in r.cerca("ROSSI"):
         print(f"  Trovato: {c.nome}")
 
     # --- Statistiche ---
@@ -299,7 +322,14 @@ if __name__ == "__main__":
     print(f"\n--- to_dict ---")
     d = r.to_dict()
     print(f"Chiavi: {list(d.keys())}")
+    print(f"Valori: {list(d.values())}")
 
     r2 = Rubrica.from_dict(d)
     print(f"\nRicostruita da dict: {len(r2)} contatti")
+    print(r2)
+
+    r2.elimina("Luca Bianchi")
+    print()
+    print(r)
+    print()
     print(r2)

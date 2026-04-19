@@ -11,3 +11,4 @@ __pycache__/
 .tmp/
 workbench/
 .codex
+labs/sql_sandbox/runtime/

@@ -58,6 +58,7 @@ def stampa_tabella(righe, colonne=None):
             for colonna in colonne
         )
         print(linea)
+    print(separatore)
     print()
 
 

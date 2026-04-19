@@ -49,11 +49,18 @@ Esempi utili per il seguito del corso:
 - `08_count_contatti.sql`
 - `09_group_by_gruppi.sql`
 - `10_group_by_having.sql`
+- `11_insert_contatto_valido.sql`
+- `12_insert_appartenenza_valida.sql`
+- `13_insert_appartenenza_invalida_fk.sql`
+- `14_update_telefono_contatto.sql`
+- `15_delete_contatto_referenziato.sql`
+- `16_delete_contatto_libero.sql`
 
 Schede di lavoro:
 
 - `esercizi/01-query-di-base.md`
 - `esercizi/02-aggregazioni.md`
+- `esercizi/03-modifiche-dati-e-vincoli.md`
 
 ## Idea di sicurezza
 

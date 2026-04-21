@@ -25,6 +25,7 @@ La sandbox funziona gia' con la sola standard library di Python.
 - `seed.sql` — dati iniziali
 - `reset_db.py` — ricrea il database di base
 - `run_sql.py` — esegue un file `.sql` su una copia temporanea
+- `sql_repl.py` — apre una REPL SQL interattiva su una copia temporanea
 - `esempi/` — query di esempio
 - `esercizi/` — schede di lavoro guidate per gli studenti
 
@@ -41,6 +42,19 @@ Eseguire una query di esempio in sandbox:
 ```bash
 python3 labs/sql_sandbox/run_sql.py labs/sql_sandbox/esempi/01_select_base.sql
 ```
+
+Aprire una sessione interattiva:
+
+```bash
+python3 labs/sql_sandbox/sql_repl.py
+```
+
+Nella REPL:
+
+- termina le query con `;`
+- puoi scrivere query su piu' righe
+- usa `.help` per l'aiuto
+- usa `.quit` o `.exit` per chiudere
 
 Esempi utili per il seguito del corso:
 

@@ -4,6 +4,10 @@ REPL interattiva per eseguire query SQL su una copia temporanea del database.
 
 import sqlite3
 import sys
+try:
+    import readline
+except ImportError:  # pragma: no cover
+    readline = None
 
 from sql_utils import crea_connessione_temporanea, esegui_statement, formatta_errore_sql
 
@@ -11,6 +15,30 @@ from sql_utils import crea_connessione_temporanea, esegui_statement, formatta_er
 PROMPT = "sql> "
 CONT_PROMPT = "...> "
 COMANDI_SPECIALI = {".quit", ".exit", ".help"}
+
+
+def configura_history_sessione():
+    if readline is None:
+        return
+
+    readline.clear_history()
+    readline.parse_and_bind("tab: complete")
+    readline.parse_and_bind("set editing-mode emacs")
+
+
+def aggiungi_a_history(statement):
+    if readline is None:
+        return
+
+    voce = " ".join(parte.strip() for parte in statement.splitlines()).strip()
+    if not voce:
+        return
+
+    storico = readline.get_current_history_length()
+    if storico > 0 and readline.get_history_item(storico) == voce:
+        return
+
+    readline.add_history(voce)
 
 
 def stampa_aiuto():
@@ -23,6 +51,7 @@ def stampa_aiuto():
     print("  - termina le query SQL con ';' anche se sono su piu' righe")
     print("  - la sessione lavora su una copia temporanea del database")
     print("  - Ctrl+C annulla la query corrente senza chiudere la REPL")
+    print("  - freccia su / giu': richiama le query gia' eseguite nella sessione corrente")
     print("Esempi:")
     print("  SELECT * FROM Contatti;")
     print("  SELECT nome, cognome FROM Contatti WHERE telefono IS NULL;")
@@ -42,6 +71,7 @@ def main():
         sys.exit(1)
 
     with temp_dir:
+        configura_history_sessione()
         print("REPL SQL sandbox")
         print("Database temporaneo creato da runtime/sandbox.sqlite")
         print("Le modifiche valgono solo per questa sessione.")
@@ -90,6 +120,7 @@ def main():
 
                 try:
                     esegui_statement(conn, statement, echo=False)
+                    aggiungi_a_history(statement)
                 except sqlite3.DatabaseError as exc:
                     print(formatta_errore_sql(exc))
 

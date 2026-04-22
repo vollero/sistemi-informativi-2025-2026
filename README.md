@@ -40,6 +40,8 @@ Università Campus Bio-Medico di Roma (UCBM) — A.A. 2025/2026
 - [Modifiche dati in SQL: INSERT, UPDATE, DELETE e vincoli](docs/sql/modifiche-dati-sql-e-vincoli.pdf)
 - [Mini prova 01: tabelle, join e modello relazionale](docs/esoneri/prova-01-tabelle-join-modello-relazionale.pdf)
 - [Mini prova 02: SQL di base e vincoli](docs/esoneri/prova-02-sql-query-e-modifiche-dati.pdf)
+- [Esercitazione: modellazione base dati per schede di allenamento](docs/esoneri/esercitazione-modellazione-schede-allenamento.pdf)
+- [Esercitazione: query SQL su schede di allenamento](docs/esoneri/esercitazione-query-schede-allenamento.pdf)
 - [Lucidi 01: join e valori mancanti](docs/slides/01-join-e-valori-mancanti.pdf)
 - [Lucidi 02: modello relazionale e algebra relazionale](docs/slides/02-modello-relazionale-e-algebra-operativa.pdf)
 - [Lucidi 03: introduzione a SQL e sandbox](docs/slides/03-introduzione-sql-e-sandbox.pdf)

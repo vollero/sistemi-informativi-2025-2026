@@ -9,7 +9,12 @@ try:
 except ImportError:  # pragma: no cover
     readline = None
 
-from sql_utils import crea_connessione_temporanea, esegui_statement, formatta_errore_sql
+from sql_utils import (
+    crea_connessione_temporanea,
+    esegui_statement,
+    formatta_errore_sql,
+    parser_argomenti_sandbox,
+)
 
 
 PROMPT = "sql> "
@@ -64,8 +69,14 @@ def stampa_aiuto():
 
 
 def main():
+    parser = parser_argomenti_sandbox(
+        "Apre una REPL SQL interattiva su una copia temporanea del database",
+        include_project=True,
+    )
+    args = parser.parse_args()
+
     try:
-        temp_dir, conn = crea_connessione_temporanea()
+        temp_dir, conn = crea_connessione_temporanea(args.project)
     except FileNotFoundError as exc:
         print(exc)
         sys.exit(1)
@@ -73,7 +84,15 @@ def main():
     with temp_dir:
         configura_history_sessione()
         print("REPL SQL sandbox")
-        print("Database temporaneo creato da runtime/sandbox.sqlite")
+        if args.project is None:
+            print("Progetto: base")
+            print("Database temporaneo creato da runtime/sandbox.sqlite")
+        else:
+            print(f"Progetto: {args.project}")
+            print(
+                "Database temporaneo creato da "
+                f"progetti/{args.project}/runtime/sandbox.sqlite"
+            )
         print("Le modifiche valgono solo per questa sessione.")
         print("Termina ogni query con ';'. Usa .help per l'aiuto, .quit per uscire.")
 

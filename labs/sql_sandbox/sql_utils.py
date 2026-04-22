@@ -2,6 +2,7 @@
 Utility condivise per la sandbox SQL del corso.
 """
 
+import argparse
 from pathlib import Path
 import shutil
 import sqlite3
@@ -9,7 +10,47 @@ import tempfile
 
 
 BASE_DIR = Path(__file__).resolve().parent
-DB_PATH = BASE_DIR / "runtime" / "sandbox.sqlite"
+PROJECTS_DIR = BASE_DIR / "progetti"
+
+
+def risolvi_dir_progetto(project=None):
+    if project is None:
+        return BASE_DIR
+
+    project_dir = PROJECTS_DIR / project
+    if not project_dir.exists():
+        raise FileNotFoundError(f"Progetto sandbox non trovato: {project}")
+
+    return project_dir
+
+
+def risolvi_percorsi_progetto(project=None):
+    project_dir = risolvi_dir_progetto(project)
+    return {
+        "project": project,
+        "label": "base" if project is None else project,
+        "dir": project_dir,
+        "runtime_dir": project_dir / "runtime",
+        "db_path": project_dir / "runtime" / "sandbox.sqlite",
+        "schema_path": project_dir / "schema.sql",
+        "seed_path": project_dir / "seed.sql",
+    }
+
+
+def parser_argomenti_sandbox(
+    descrizione,
+    include_sql_file=False,
+    include_project=False,
+):
+    parser = argparse.ArgumentParser(description=descrizione)
+    if include_project:
+        parser.add_argument(
+            "--project",
+            help="nome del progetto sandbox sotto labs/sql_sandbox/progetti/",
+        )
+    if include_sql_file:
+        parser.add_argument("sql_file", help="file .sql da eseguire")
+    return parser
 
 
 def stampa_righe(cursor):
@@ -56,13 +97,50 @@ def esegui_statement(conn, statement, echo=True):
         print(f"OK - righe coinvolte: {cursor.rowcount}")
 
 
-def crea_connessione_temporanea():
-    if not DB_PATH.exists():
-        raise FileNotFoundError("Database di base non trovato. Eseguire prima reset_db.py")
+def crea_database_base(project=None):
+    percorsi = risolvi_percorsi_progetto(project)
+
+    schema_path = percorsi["schema_path"]
+    seed_path = percorsi["seed_path"]
+    db_path = percorsi["db_path"]
+    runtime_dir = percorsi["runtime_dir"]
+
+    if not schema_path.exists():
+        raise FileNotFoundError(f"Schema non trovato: {schema_path}")
+    if not seed_path.exists():
+        raise FileNotFoundError(f"Seed non trovato: {seed_path}")
+
+    runtime_dir.mkdir(parents=True, exist_ok=True)
+
+    if db_path.exists():
+        db_path.unlink()
+
+    conn = sqlite3.connect(db_path)
+    try:
+        conn.execute("PRAGMA foreign_keys = ON;")
+        conn.executescript(schema_path.read_text(encoding="utf-8"))
+        conn.executescript(seed_path.read_text(encoding="utf-8"))
+        conn.commit()
+    finally:
+        conn.close()
+
+    return db_path
+
+
+def crea_connessione_temporanea(project=None):
+    percorsi = risolvi_percorsi_progetto(project)
+    db_path = percorsi["db_path"]
+
+    if not db_path.exists():
+        if project is None:
+            raise FileNotFoundError("Database di base non trovato. Eseguire prima reset_db.py")
+        raise FileNotFoundError(
+            f"Database del progetto '{project}' non trovato. Eseguire prima reset_db.py --project {project}"
+        )
 
     temp_dir = tempfile.TemporaryDirectory(prefix="sql_sandbox_")
     temp_db = Path(temp_dir.name) / "sandbox.sqlite"
-    shutil.copy2(DB_PATH, temp_db)
+    shutil.copy2(db_path, temp_db)
 
     conn = sqlite3.connect(temp_db)
     conn.execute("PRAGMA foreign_keys = ON;")

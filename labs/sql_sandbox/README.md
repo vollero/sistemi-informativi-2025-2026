@@ -26,6 +26,7 @@ La sandbox funziona gia' con la sola standard library di Python.
 - `reset_db.py` — ricrea il database di base
 - `run_sql.py` — esegue un file `.sql` su una copia temporanea
 - `sql_repl.py` — apre una REPL SQL interattiva su una copia temporanea
+- `progetti/` — sandbox tematiche aggiuntive
 - `esempi/` — query di esempio
 - `esercizi/` — schede di lavoro guidate per gli studenti
 
@@ -56,6 +57,21 @@ Nella REPL:
 - usa `.help` per l'aiuto
 - usa `.quit` o `.exit` per chiudere
 
+## Progetti dedicati
+
+Gli stessi script possono essere usati anche su progetti specifici.
+
+Esempio: sandbox dedicata alla palestra
+
+```bash
+python3 labs/sql_sandbox/reset_db.py --project palestra
+python3 labs/sql_sandbox/run_sql.py --project palestra \
+    labs/sql_sandbox/progetti/palestra/esempi/01-schede-attive.sql
+python3 labs/sql_sandbox/sql_repl.py --project palestra
+```
+
+In questo modo la sandbox base e la sandbox di progetto restano separate.
+
 Esempi utili per il seguito del corso:
 
 - `06_select_where_order_by.sql`
@@ -75,6 +91,12 @@ Schede di lavoro:
 - `esercizi/01-query-di-base.md`
 - `esercizi/02-aggregazioni.md`
 - `esercizi/03-modifiche-dati-e-vincoli.md`
+- `esercizi/04-modellazione-schede-allenamento.md`
+- `esercizi/05-query-su-schede-allenamento.md`
+
+Progetti disponibili:
+
+- `progetti/palestra/`
 
 ## Idea di sicurezza
 

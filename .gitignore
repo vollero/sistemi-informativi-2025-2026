@@ -12,3 +12,4 @@ __pycache__/
 workbench/
 .codex
 labs/sql_sandbox/runtime/
+labs/sql_sandbox/progetti/*/runtime/

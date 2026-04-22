@@ -6,21 +6,24 @@ from pathlib import Path
 import sqlite3
 import sys
 
-from sql_utils import crea_connessione_temporanea, esegui_statement
+from sql_utils import crea_connessione_temporanea, esegui_statement, parser_argomenti_sandbox
 
 
 def main():
-    if len(sys.argv) != 2:
-        print("Uso: python3 labs/sql_sandbox/run_sql.py <file.sql>")
-        sys.exit(1)
+    parser = parser_argomenti_sandbox(
+        "Esegue un file SQL su una copia temporanea del database",
+        include_sql_file=True,
+        include_project=True,
+    )
+    args = parser.parse_args()
 
-    sql_file = Path(sys.argv[1]).resolve()
+    sql_file = Path(args.sql_file).resolve()
     if not sql_file.exists():
         print(f"File non trovato: {sql_file}")
         sys.exit(1)
 
     try:
-        temp_dir, conn = crea_connessione_temporanea()
+        temp_dir, conn = crea_connessione_temporanea(args.project)
     except FileNotFoundError as exc:
         print(exc)
         sys.exit(1)

@@ -2,33 +2,23 @@
 Ricrea il database SQLite di base della sandbox SQL.
 """
 
-from pathlib import Path
-import sqlite3
-
-
-BASE_DIR = Path(__file__).resolve().parent
-RUNTIME_DIR = BASE_DIR / "runtime"
-DB_PATH = RUNTIME_DIR / "sandbox.sqlite"
-SCHEMA_PATH = BASE_DIR / "schema.sql"
-SEED_PATH = BASE_DIR / "seed.sql"
+from sql_utils import crea_database_base, parser_argomenti_sandbox
 
 
 def main():
-    RUNTIME_DIR.mkdir(parents=True, exist_ok=True)
+    parser = parser_argomenti_sandbox(
+        "Ricrea il database SQLite della sandbox",
+        include_project=True,
+    )
+    args = parser.parse_args()
 
-    if DB_PATH.exists():
-        DB_PATH.unlink()
-
-    conn = sqlite3.connect(DB_PATH)
     try:
-        conn.execute("PRAGMA foreign_keys = ON;")
-        conn.executescript(SCHEMA_PATH.read_text(encoding="utf-8"))
-        conn.executescript(SEED_PATH.read_text(encoding="utf-8"))
-        conn.commit()
-    finally:
-        conn.close()
+        db_path = crea_database_base(args.project)
+    except FileNotFoundError as exc:
+        print(exc)
+        raise SystemExit(1) from exc
 
-    print(f"Database ricreato in: {DB_PATH}")
+    print(f"Database ricreato in: {db_path}")
 
 
 if __name__ == "__main__":

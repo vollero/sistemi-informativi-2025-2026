@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="heading row">
+  <div>
+    <p class="eyebrow">{{ config.role }}</p>
+    <h1>{{ config.title }}</h1>
+  </div>
+  <a class="button primary" href="{{ url_for('entity_new', name=name) }}">Nuovo</a>
+</section>
+
+<section class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        {% for col in config.columns %}<th>{{ col }}</th>{% endfor %}
+        <th>azioni</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+        <tr>
+          {% for col in config.columns %}<td>{{ row[col] or "NULL" }}</td>{% endfor %}
+          <td class="actions">
+            <a class="button small" href="{{ url_for('entity_edit', name=name, item_id=row[config.pk]) }}">Modifica</a>
+            <form method="post" action="{{ url_for('entity_delete', name=name, item_id=row[config.pk]) }}">
+              <button class="button small danger" type="submit">Elimina</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

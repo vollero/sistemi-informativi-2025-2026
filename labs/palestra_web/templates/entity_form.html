@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="heading">
+  <p class="eyebrow">{{ config.title }}</p>
+  <h1>{{ "Modifica" if item else "Nuovo record" }}</h1>
+</section>
+
+<form class="form" method="post">
+  {% for field, label, type, required in config.fields %}
+    <label>
+      <span>{{ label }}</span>
+      <input
+        type="{{ type }}"
+        name="{{ field }}"
+        value="{{ item[field] if item else '' }}"
+        {% if item and field == config.pk %}readonly{% endif %}
+        {% if required %}required{% endif %}
+      >
+    </label>
+  {% endfor %}
+  <div class="form-actions">
+    <button class="button primary" type="submit">Salva</button>
+    <a class="button" href="{{ url_for('entity_list', name=name) }}">Annulla</a>
+  </div>
+</form>
+{% endblock %}

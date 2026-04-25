@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="heading">
+  <p class="eyebrow">iscritto</p>
+  <h1>Seleziona profilo</h1>
+</section>
+
+<section class="grid two">
+  {% for i in iscritti %}
+    <a class="panel" href="{{ url_for('member_dashboard', iscritto_id=i.id_iscritto) }}">
+      <h2>{{ i.nome }} {{ i.cognome }}</h2>
+      <p>ID iscritto {{ i.id_iscritto }}</p>
+    </a>
+  {% endfor %}
+</section>
+{% endblock %}

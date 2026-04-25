@@ -14,3 +14,4 @@ workbench/
 labs/sql_sandbox/runtime/
 labs/sql_sandbox/progetti/*/runtime/
 labs/palestra_repl/runtime/
+labs/palestra_web/runtime/

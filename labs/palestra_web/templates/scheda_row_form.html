@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="heading">
+  <p class="eyebrow">scheda {{ scheda_id }}</p>
+  <h1>{{ "Modifica esercizio scheda" if item else "Aggiungi esercizio" }}</h1>
+</section>
+
+<form class="form" method="post">
+  <label><span>Ordine</span><input type="number" name="ordine_esecuzione" value="{{ item.ordine_esecuzione if item else '' }}" {% if item %}readonly{% endif %} required></label>
+  <label>
+    <span>Esercizio</span>
+    <select name="id_esercizio" required>
+      {% for e in esercizi %}
+        <option value="{{ e.id_esercizio }}" {% if item and item.id_esercizio == e.id_esercizio %}selected{% endif %}>{{ e.nome_esercizio }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label><span>Serie</span><input type="number" name="serie" value="{{ item.serie if item else '' }}" required></label>
+  <label><span>Ripetizioni</span><input type="number" name="ripetizioni" value="{{ item.ripetizioni if item else '' }}"></label>
+  <label><span>Carico suggerito</span><input type="number" step="0.1" name="carico_suggerito" value="{{ item.carico_suggerito if item else '' }}"></label>
+  <label><span>Durata secondi</span><input type="number" name="durata_secondi" value="{{ item.durata_secondi if item else '' }}"></label>
+  <label><span>Recupero secondi</span><input type="number" name="recupero_secondi" value="{{ item.recupero_secondi if item else '' }}"></label>
+  <div class="form-actions">
+    <button class="button primary" type="submit">Salva</button>
+    <a class="button" href="{{ url_for('scheda_detail', scheda_id=scheda_id) }}">Annulla</a>
+  </div>
+</form>
+{% endblock %}

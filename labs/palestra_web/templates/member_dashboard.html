@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="heading row">
+  <div>
+    <p class="eyebrow">iscritto</p>
+    <h1>{{ iscritto.nome }} {{ iscritto.cognome }}</h1>
+  </div>
+  <a class="button primary" href="{{ url_for('execution_new', iscritto_id=iscritto.id_iscritto) }}">Nuova esecuzione</a>
+</section>
+
+<section class="split">
+  <div>
+    <h2>Schede</h2>
+    <div class="table-wrap compact">
+      <table>
+        <thead><tr><th>id</th><th>titolo</th><th>inizio</th><th>attiva</th></tr></thead>
+        <tbody>
+          {% for s in schede %}
+            <tr><td>{{ s.id_scheda }}</td><td>{{ s.titolo }}</td><td>{{ s.data_inizio }}</td><td>{{ s.attiva }}</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div>
+    <h2>Esecuzioni</h2>
+    <div class="table-wrap compact">
+      <table>
+        <thead><tr><th>data</th><th>esercizio</th><th>carico</th><th>rep</th><th>azioni</th></tr></thead>
+        <tbody>
+          {% for e in esecuzioni %}
+            <tr>
+              <td>{{ e.data_esecuzione }}</td>
+              <td>{{ e.nome_esercizio }}</td>
+              <td>{{ e.carico_effettivo or "NULL" }}</td>
+              <td>{{ e.ripetizioni_effettive or "NULL" }}</td>
+              <td class="actions">
+                <a class="button small" href="{{ url_for('execution_edit', iscritto_id=iscritto.id_iscritto, execution_id=e.id_esecuzione) }}">Modifica</a>
+                <form method="post" action="{{ url_for('execution_delete', iscritto_id=iscritto.id_iscritto, execution_id=e.id_esecuzione) }}">
+                  <button class="button small danger" type="submit">Elimina</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}

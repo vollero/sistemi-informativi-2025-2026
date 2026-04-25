@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">Laboratorio Sistemi Informativi</p>
+    <h1>Applicazione web per la gestione palestra</h1>
+  </div>
+  <div class="stats">
+    <div><strong>{{ stats.iscritti }}</strong><span>iscritti</span></div>
+    <div><strong>{{ stats.istruttori }}</strong><span>istruttori</span></div>
+    <div><strong>{{ stats.schede }}</strong><span>schede</span></div>
+    <div><strong>{{ stats.esecuzioni }}</strong><span>esecuzioni</span></div>
+  </div>
+</section>
+
+<section class="grid three">
+  <a class="panel" href="{{ url_for('admin_home') }}">
+    <h2>Amministratore</h2>
+    <p>Gestione anagrafica di iscritti e istruttori.</p>
+  </a>
+  <a class="panel" href="{{ url_for('trainer_home') }}">
+    <h2>Istruttore</h2>
+    <p>Gestione esercizi, schede e contenuti delle schede.</p>
+  </a>
+  <a class="panel" href="{{ url_for('member_home') }}">
+    <h2>Iscritto</h2>
+    <p>Consultazione schede e registrazione delle esecuzioni.</p>
+  </a>
+</section>
+{% endblock %}

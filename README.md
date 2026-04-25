@@ -17,6 +17,7 @@ Università Campus Bio-Medico di Roma (UCBM) — A.A. 2025/2026
   - `tabelle/` — Esempi Python su logica tabellare e operazioni base
   - `sql_sandbox/` — Sandbox SQL locale basata su SQLite
   - `palestra_repl/` — Applicazione REPL a ruoli sul dominio palestra
+  - `palestra_web/` — Applicazione web Flask a ruoli sul dominio palestra
   - `rubrica_oop/` — Progetto CRUD rubrica telefonica (OOP + persistenza JSON)
 
 ## Strumenti Utilizzati

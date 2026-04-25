@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="heading">
+  <p class="eyebrow">{{ iscritto.nome }} {{ iscritto.cognome }}</p>
+  <h1>{{ "Modifica esecuzione" if item else "Nuova esecuzione" }}</h1>
+</section>
+
+<form class="form" method="post">
+  <label><span>ID esecuzione</span><input type="number" name="id_esecuzione" value="{{ item.id_esecuzione if item else '' }}" {% if item %}readonly{% endif %} required></label>
+  <label>
+    <span>Esercizio assegnato</span>
+    <select name="slot" required onchange="const [s,o]=this.value.split(':'); this.form.id_scheda.value=s; this.form.ordine_esecuzione.value=o;">
+      {% for opt in options %}
+        <option value="{{ opt.id_scheda }}:{{ opt.ordine_esecuzione }}" {% if item and item.id_scheda == opt.id_scheda and item.ordine_esecuzione == opt.ordine_esecuzione %}selected{% endif %}>
+          Scheda {{ opt.id_scheda }} · {{ opt.titolo }} · {{ opt.ordine_esecuzione }} · {{ opt.nome_esercizio }}
+        </option>
+      {% endfor %}
+    </select>
+  </label>
+  <input type="hidden" name="id_scheda" value="{{ item.id_scheda if item else (options[0].id_scheda if options else '') }}">
+  <input type="hidden" name="ordine_esecuzione" value="{{ item.ordine_esecuzione if item else (options[0].ordine_esecuzione if options else '') }}">
+  <label><span>Data</span><input type="date" name="data_esecuzione" value="{{ item.data_esecuzione if item else '' }}" required></label>
+  <label><span>Carico effettivo</span><input type="number" step="0.1" name="carico_effettivo" value="{{ item.carico_effettivo if item else '' }}"></label>
+  <label><span>Ripetizioni effettive</span><input type="number" name="ripetizioni_effettive" value="{{ item.ripetizioni_effettive if item else '' }}"></label>
+  <label><span>Nota</span><input type="text" name="nota" value="{{ item.nota if item else '' }}"></label>
+  <div class="form-actions">
+    <button class="button primary" type="submit">Salva</button>
+    <a class="button" href="{{ url_for('member_dashboard', iscritto_id=iscritto.id_iscritto) }}">Annulla</a>
+  </div>
+</form>
+{% endblock %}

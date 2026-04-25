@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="heading">
+  <p class="eyebrow">scheda</p>
+  <h1>{{ "Modifica scheda" if scheda else "Nuova scheda" }}</h1>
+</section>
+
+<form class="form" method="post">
+  <label><span>ID scheda</span><input type="number" name="id_scheda" value="{{ scheda.id_scheda if scheda else '' }}" {% if scheda %}readonly{% endif %} required></label>
+  <label>
+    <span>Iscritto</span>
+    <select name="id_iscritto" required>
+      {% for i in iscritti %}
+        <option value="{{ i.id_iscritto }}" {% if scheda and scheda.id_iscritto == i.id_iscritto %}selected{% endif %}>{{ i.nome }} {{ i.cognome }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>
+    <span>Istruttore</span>
+    <select name="id_istruttore" required>
+      {% for it in istruttori %}
+        <option value="{{ it.id_istruttore }}" {% if scheda and scheda.id_istruttore == it.id_istruttore %}selected{% endif %}>{{ it.nome }} {{ it.cognome }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label><span>Titolo</span><input type="text" name="titolo" value="{{ scheda.titolo if scheda else '' }}" required></label>
+  <label><span>Data inizio</span><input type="date" name="data_inizio" value="{{ scheda.data_inizio if scheda else '' }}" required></label>
+  <label><span>Data fine</span><input type="date" name="data_fine" value="{{ scheda.data_fine if scheda else '' }}"></label>
+  <label class="check"><input type="checkbox" name="attiva" value="1" {% if not scheda or scheda.attiva %}checked{% endif %}> <span>Attiva</span></label>
+  <div class="form-actions">
+    <button class="button primary" type="submit">Salva</button>
+    <a class="button" href="{{ url_for('schede_list') }}">Annulla</a>
+  </div>
+</form>
+{% endblock %}

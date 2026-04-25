@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="heading row">
+  <div>
+    <p class="eyebrow">{{ scheda.iscritto }} · {{ scheda.istruttore }}</p>
+    <h1>{{ scheda.titolo }}</h1>
+  </div>
+  <a class="button primary" href="{{ url_for('scheda_row_new', scheda_id=scheda.id_scheda) }}">Aggiungi esercizio</a>
+</section>
+
+<section class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>ordine</th><th>esercizio</th><th>serie</th><th>ripetizioni</th><th>carico</th><th>durata</th><th>recupero</th><th>azioni</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for d in dettagli %}
+        <tr>
+          <td>{{ d.ordine_esecuzione }}</td>
+          <td>{{ d.nome_esercizio }}</td>
+          <td>{{ d.serie }}</td>
+          <td>{{ d.ripetizioni or "NULL" }}</td>
+          <td>{{ d.carico_suggerito or "NULL" }}</td>
+          <td>{{ d.durata_secondi or "NULL" }}</td>
+          <td>{{ d.recupero_secondi or "NULL" }}</td>
+          <td class="actions">
+            <a class="button small" href="{{ url_for('scheda_row_edit', scheda_id=scheda.id_scheda, ordine=d.ordine_esecuzione) }}">Modifica</a>
+            <form method="post" action="{{ url_for('scheda_row_delete', scheda_id=scheda.id_scheda, ordine=d.ordine_esecuzione) }}">
+              <button class="button small danger" type="submit">Elimina</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

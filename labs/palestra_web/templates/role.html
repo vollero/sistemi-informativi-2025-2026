@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="heading">
+  <p class="eyebrow">Ruolo</p>
+  <h1>{{ role|capitalize }}</h1>
+</section>
+
+<section class="grid two">
+  {% for title, text, href in cards %}
+    <a class="panel" href="{{ href }}">
+      <h2>{{ title }}</h2>
+      <p>{{ text }}</p>
+    </a>
+  {% endfor %}
+</section>
+{% endblock %}

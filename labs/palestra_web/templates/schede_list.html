@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<section class="heading row">
+  <div>
+    <p class="eyebrow">istruttore</p>
+    <h1>Schede di allenamento</h1>
+  </div>
+  <a class="button primary" href="{{ url_for('scheda_new') }}">Nuova scheda</a>
+</section>
+
+<section class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>id</th><th>titolo</th><th>iscritto</th><th>istruttore</th><th>inizio</th><th>fine</th><th>attiva</th><th>azioni</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in schede %}
+        <tr>
+          <td>{{ s.id_scheda }}</td>
+          <td>{{ s.titolo }}</td>
+          <td>{{ s.iscritto }}</td>
+          <td>{{ s.istruttore }}</td>
+          <td>{{ s.data_inizio }}</td>
+          <td>{{ s.data_fine or "NULL" }}</td>
+          <td>{{ s.attiva }}</td>
+          <td class="actions">
+            <a class="button small" href="{{ url_for('scheda_detail', scheda_id=s.id_scheda) }}">Dettaglio</a>
+            <a class="button small" href="{{ url_for('scheda_edit', scheda_id=s.id_scheda) }}">Modifica</a>
+            <form method="post" action="{{ url_for('scheda_delete', scheda_id=s.id_scheda) }}">
+              <button class="button small danger" type="submit">Elimina</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}

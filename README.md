@@ -11,6 +11,7 @@ Università Campus Bio-Medico di Roma (UCBM) — A.A. 2025/2026
   - `git/` — Materiale introduttivo su Git e GitHub
   - `tabelle/` — Percorso da rappresentazione tabellare a modello relazionale
   - `sql/` — Introduzione a SQL e ambiente di esercitazione
+  - `laboratori/` — Materiale di preparazione ai laboratori applicativi
   - `esoneri/` — Tracce di prova ed esercitazioni valutative
   - `slides/` — Lucidi delle lezioni
 - `labs/` — Esercitazioni di laboratorio
@@ -40,13 +41,16 @@ Università Campus Bio-Medico di Roma (UCBM) — A.A. 2025/2026
 - [Query SQL di base: SELECT, WHERE, ORDER BY](docs/sql/query-sql-di-base.pdf)
 - [Aggregazioni, GROUP BY e HAVING](docs/sql/aggregazioni-e-group-by.pdf)
 - [Modifiche dati in SQL: INSERT, UPDATE, DELETE e vincoli](docs/sql/modifiche-dati-sql-e-vincoli.pdf)
+- [Architettura dei laboratori: REPL, web e parti intercambiabili](docs/laboratori/architettura-laboratori-repl-web.pdf)
 - [Mini prova 01: tabelle, join e modello relazionale](docs/esoneri/prova-01-tabelle-join-modello-relazionale.pdf)
 - [Mini prova 02: SQL di base e vincoli](docs/esoneri/prova-02-sql-query-e-modifiche-dati.pdf)
 - [Esercitazione: modellazione base dati per schede di allenamento](docs/esoneri/esercitazione-modellazione-schede-allenamento.pdf)
 - [Esercitazione: query SQL su schede di allenamento](docs/esoneri/esercitazione-query-schede-allenamento.pdf)
+- [Proposte elaborato: modellazione dati e architetture applicative](docs/esoneri/proposte-elaborati-modellazione-architettura.pdf)
 - [Lucidi 01: join e valori mancanti](docs/slides/01-join-e-valori-mancanti.pdf)
 - [Lucidi 02: modello relazionale e algebra relazionale](docs/slides/02-modello-relazionale-e-algebra-operativa.pdf)
 - [Lucidi 03: introduzione a SQL e sandbox](docs/slides/03-introduzione-sql-e-sandbox.pdf)
 - [Lucidi 04: query SQL di base](docs/slides/04-query-sql-di-base.pdf)
 - [Lucidi 05: aggregazioni e GROUP BY](docs/slides/05-aggregazioni-e-group-by.pdf)
 - [Lucidi 06: modifiche dati in SQL](docs/slides/06-modifiche-dati-sql-e-vincoli.pdf)
+- [Lucidi 07: architettura dei laboratori REPL e web](docs/slides/07-architettura-laboratori-repl-web.pdf)

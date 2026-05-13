@@ -89,11 +89,22 @@ def esegui_statement(conn, statement, echo=True):
     if echo:
         print(f"\nSQL> {statement}")
 
+    era_in_transazione = conn.in_transaction
+    prima_parola = statement.split(None, 1)[0].rstrip(";").upper()
+    controlla_transazione = {
+        "BEGIN",
+        "COMMIT",
+        "ROLLBACK",
+        "SAVEPOINT",
+        "RELEASE",
+    }
+
     cursor = conn.execute(statement)
     if cursor.description is not None:
         stampa_righe(cursor)
     else:
-        conn.commit()
+        if prima_parola not in controlla_transazione and not era_in_transazione:
+            conn.commit()
         print(f"OK - righe coinvolte: {cursor.rowcount}")
 
 

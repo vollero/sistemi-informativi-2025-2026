@@ -85,6 +85,10 @@ Esempi utili per il seguito del corso:
 - `14_update_telefono_contatto.sql`
 - `15_delete_contatto_referenziato.sql`
 - `16_delete_contatto_libero.sql`
+- `17_schema_crud.sql`
+- `18_data_crud.sql`
+- `19_transaction_rollback.sql`
+- `20_transaction_commit.sql`
 
 Schede di lavoro:
 
@@ -93,6 +97,7 @@ Schede di lavoro:
 - `esercizi/03-modifiche-dati-e-vincoli.md`
 - `esercizi/04-modellazione-schede-allenamento.md`
 - `esercizi/05-query-su-schede-allenamento.md`
+- `esercizi/06-guida-comandi-sql-transazioni.md`
 
 Progetti disponibili:
 

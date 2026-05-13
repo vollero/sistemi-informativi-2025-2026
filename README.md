@@ -41,6 +41,7 @@ Università Campus Bio-Medico di Roma (UCBM) — A.A. 2025/2026
 - [Query SQL di base: SELECT, WHERE, ORDER BY](docs/sql/query-sql-di-base.pdf)
 - [Aggregazioni, GROUP BY e HAVING](docs/sql/aggregazioni-e-group-by.pdf)
 - [Modifiche dati in SQL: INSERT, UPDATE, DELETE e vincoli](docs/sql/modifiche-dati-sql-e-vincoli.pdf)
+- [Guida ai comandi SQL e alle transazioni](docs/sql/guida-comandi-sql-e-transazioni.pdf)
 - [Architettura dei laboratori: REPL, web e parti intercambiabili](docs/laboratori/architettura-laboratori-repl-web.pdf)
 - [Mini prova 01: tabelle, join e modello relazionale](docs/esoneri/prova-01-tabelle-join-modello-relazionale.pdf)
 - [Mini prova 02: SQL di base e vincoli](docs/esoneri/prova-02-sql-query-e-modifiche-dati.pdf)
@@ -54,3 +55,4 @@ Università Campus Bio-Medico di Roma (UCBM) — A.A. 2025/2026
 - [Lucidi 05: aggregazioni e GROUP BY](docs/slides/05-aggregazioni-e-group-by.pdf)
 - [Lucidi 06: modifiche dati in SQL](docs/slides/06-modifiche-dati-sql-e-vincoli.pdf)
 - [Lucidi 07: architettura dei laboratori REPL e web](docs/slides/07-architettura-laboratori-repl-web.pdf)
+- [Lucidi 08: guida ai comandi SQL e transazioni](docs/slides/08-guida-comandi-sql-e-transazioni.pdf)

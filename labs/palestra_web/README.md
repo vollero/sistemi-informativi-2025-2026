@@ -49,6 +49,15 @@ http://127.0.0.1:5000
 - `templates/` — viste HTML Jinja
 - `static/style.css` — stile dell'interfaccia
 
+## Variante containerizzata
+
+La stessa applicazione puo' usare PostgreSQL quando viene avviata con la
+variabile `DATABASE_URL`. La configurazione pronta per il laboratorio e' in:
+
+```text
+labs/palestra_containerizzata/
+```
+
 ## Nota didattica
 
 Il laboratorio evidenzia il passaggio da:

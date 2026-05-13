@@ -3,11 +3,19 @@
 Applicazione web Flask per il laboratorio palestra.
 """
 
+import os
 from pathlib import Path
 import sqlite3
 import sys
 
 from flask import Flask, flash, redirect, render_template, request, url_for
+
+try:
+    import psycopg
+    from psycopg.rows import dict_row
+except ImportError:  # dipendenza richiesta solo nella versione containerizzata
+    psycopg = None
+    dict_row = None
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -15,6 +23,7 @@ RUNTIME_DIR = BASE_DIR / "runtime"
 DB_PATH = RUNTIME_DIR / "palestra.sqlite"
 SCHEMA_PATH = BASE_DIR / "schema.sql"
 SEED_PATH = BASE_DIR / "seed.sql"
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 
 app = Flask(__name__)
@@ -68,7 +77,20 @@ ENTITIES = {
 }
 
 
+def adatta_sql(sql):
+    if DATABASE_URL:
+        return sql.replace("?", "%s")
+    return sql
+
+
 def init_db(reset=False):
+    if DATABASE_URL:
+        if psycopg is None:
+            raise RuntimeError("DATABASE_URL impostato, ma il pacchetto psycopg non e' installato.")
+        with get_db() as conn:
+            conn.execute("SELECT 1")
+        return
+
     RUNTIME_DIR.mkdir(parents=True, exist_ok=True)
     if reset and DB_PATH.exists():
         DB_PATH.unlink()
@@ -83,6 +105,9 @@ def init_db(reset=False):
 
 
 def get_db():
+    if DATABASE_URL:
+        return psycopg.connect(DATABASE_URL, row_factory=dict_row)
+
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA foreign_keys = ON;")
@@ -91,19 +116,19 @@ def get_db():
 
 def rows(sql, params=()):
     with get_db() as conn:
-        return conn.execute(sql, params).fetchall()
+        return conn.execute(adatta_sql(sql), params).fetchall()
 
 
 def row(sql, params=()):
     with get_db() as conn:
-        return conn.execute(sql, params).fetchone()
+        return conn.execute(adatta_sql(sql), params).fetchone()
 
 
 def execute(sql, params=()):
     with get_db() as conn:
-        cursor = conn.execute(sql, params)
+        cursor = conn.execute(adatta_sql(sql), params)
         conn.commit()
-        return cursor.lastrowid
+        return getattr(cursor, "lastrowid", None)
 
 
 def form_value(name, field_type):
@@ -126,6 +151,10 @@ def entity_config(name):
 def handle_integrity_error(exc):
     flash(f"Operazione bloccata dai vincoli del database: {exc}", "error")
     return redirect(request.referrer or url_for("index"))
+
+
+if psycopg is not None:
+    app.register_error_handler(psycopg.IntegrityError, handle_integrity_error)
 
 
 @app.get("/")
@@ -561,4 +590,8 @@ def execution_update_values(execution_id, iscritto_id):
 
 if __name__ == "__main__":
     init_db(reset="--reset" in sys.argv)
-    app.run(debug=True, use_reloader=False)
+    host = os.environ.get("FLASK_HOST", "127.0.0.1")
+    port = int(os.environ.get("FLASK_PORT", "5000"))
+    debug_default = "0" if DATABASE_URL else "1"
+    debug = os.environ.get("FLASK_DEBUG", debug_default) == "1"
+    app.run(host=host, port=port, debug=debug, use_reloader=False)

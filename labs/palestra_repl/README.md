@@ -38,6 +38,15 @@ python3 labs/palestra_repl/main.py --reset
 - `app_repl.py` — interfaccia REPL e menu per ruolo
 - `main.py` — punto di ingresso
 
+## Variante containerizzata
+
+La stessa REPL puo' usare PostgreSQL quando viene avviata con la variabile
+`DATABASE_URL`. La configurazione pronta per il laboratorio e' in:
+
+```text
+labs/palestra_containerizzata/
+```
+
 ## Punto didattico
 
 Questo laboratorio e' indipendente dalla sandbox SQL generale:

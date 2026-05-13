@@ -2,7 +2,7 @@
 REPL applicativa del laboratorio palestra.
 """
 
-import sqlite3
+from app_db import INTEGRITY_ERRORS
 
 
 def stampa_tabella(righe, colonne):
@@ -64,7 +64,7 @@ class PalestraREPL:
             _, funzione = self.ruoli[scelta]
             try:
                 funzione()
-            except sqlite3.IntegrityError as exc:
+            except INTEGRITY_ERRORS as exc:
                 print(f"\nErrore di vincolo: {exc}")
             except KeyboardInterrupt:
                 print("\nOperazione annullata.")
@@ -131,7 +131,7 @@ class PalestraREPL:
 
             try:
                 comandi[scelta][1]()
-            except sqlite3.IntegrityError as exc:
+            except INTEGRITY_ERRORS as exc:
                 print(f"Errore di vincolo: {exc}")
 
     def _prompt(self, etichetta, default=None, allow_empty=False):

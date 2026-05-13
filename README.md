@@ -19,6 +19,7 @@ Università Campus Bio-Medico di Roma (UCBM) — A.A. 2025/2026
   - `sql_sandbox/` — Sandbox SQL locale basata su SQLite
   - `palestra_repl/` — Applicazione REPL a ruoli sul dominio palestra
   - `palestra_web/` — Applicazione web Flask a ruoli sul dominio palestra
+  - `palestra_containerizzata/` — Versione Docker con PostgreSQL, web e REPL
   - `rubrica_oop/` — Progetto CRUD rubrica telefonica (OOP + persistenza JSON)
 
 ## Strumenti Utilizzati
@@ -26,6 +27,9 @@ Università Campus Bio-Medico di Roma (UCBM) — A.A. 2025/2026
 - Python 3.12
 - Paradigma Object-Oriented
 - Persistenza su file JSON
+- SQLite e PostgreSQL
+- Flask
+- Docker Compose
 
 ## Materiali Attualmente Disponibili
 

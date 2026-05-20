@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="lesson">
+  <p class="eyebrow">Demo 01</p>
+  <h1>Pagina statica: il browser costruisce il DOM</h1>
+  <p>
+    Questa pagina contiene elementi HTML semplici. Flask restituisce il template;
+    il browser lo trasforma in nodi del DOM.
+  </p>
+</section>
+
+<section class="panel">
+  <h2>Oggetti visibili</h2>
+  <p>Questa card e' una <code>&lt;section&gt;</code> con titolo, testo e link.</p>
+  <a class="button" href="{{ url_for('demo_template') }}">Vai alla demo template</a>
+</section>
+
+<section class="trace">
+  <h2>Traccia da leggere</h2>
+  <pre>GET /demo/01-pagina-statica
+  -> demo_pagina_statica()
+      -> render_template("demo_static.html")
+          -> HTML
+              -> DOM</pre>
+</section>
+{% endblock %}

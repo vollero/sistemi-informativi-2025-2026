@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="lesson">
+  <p class="eyebrow">Demo 05</p>
+  <h1>Eventi DOM: interazione nel browser</h1>
+  <p>
+    Alcuni eventi possono essere gestiti direttamente nel browser. Qui il server
+    Flask fornisce la pagina e i dati iniziali; JavaScript reagisce a click e
+    input senza interrogare il server.
+  </p>
+</section>
+
+<section class="columns">
+  <div class="panel">
+    <h2>Filtro schede</h2>
+    <label>
+      Cerca nel DOM
+      <input id="filterInput" placeholder="es. forza">
+    </label>
+    <ul id="schedeList" class="clean-list">
+      {% for scheda in schede %}
+        <li data-search="{{ scheda.titolo|lower }} {{ scheda.stato|lower }}">
+          <strong>{{ scheda.titolo }}</strong>
+          <span>{{ scheda.stato }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h2>Click counter</h2>
+    <p>Il pulsante modifica un nodo del DOM senza chiamare Flask.</p>
+    <button id="counterButton" class="button" type="button">Click: <span id="counterValue">0</span></button>
+  </div>
+</section>
+
+<section class="trace">
+  <h2>Da osservare</h2>
+  <pre>evento input
+  -> JavaScript legge il valore
+      -> mostra/nasconde nodi &lt;li&gt;
+          -> il server non riceve richieste</pre>
+</section>
+
+<script src="{{ url_for('static', filename='events.js') }}"></script>
+{% endblock %}

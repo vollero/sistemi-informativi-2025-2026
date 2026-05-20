@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="lesson">
+  <p class="eyebrow">Demo 02</p>
+  <h1>Template dinamico: dati Python dentro HTML</h1>
+  <p>
+    Le liste di dizionari Python vengono passate a Jinja e diventano elementi
+    HTML ripetuti.
+  </p>
+</section>
+
+<section class="columns">
+  <div class="panel">
+    <h2>Iscritti</h2>
+    <ul class="clean-list">
+      {% for iscritto in iscritti %}
+        <li>
+          <strong>{{ iscritto.nome }} {{ iscritto.cognome }}</strong>
+          <span>{{ iscritto.obiettivo }}</span>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h2>Schede</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Titolo</th>
+          <th>Esercizi</th>
+          <th>Stato</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for scheda in schede %}
+          <tr>
+            <td>{{ scheda.titolo }}</td>
+            <td>{{ scheda.esercizi }}</td>
+            <td><span class="badge">{{ scheda.stato }}</span></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="trace">
+  <h2>Concetto</h2>
+  <pre>lista Python
+  -> ciclo Jinja
+      -> elementi HTML ripetuti
+          -> oggetti visibili nel DOM</pre>
+</section>
+{% endblock %}

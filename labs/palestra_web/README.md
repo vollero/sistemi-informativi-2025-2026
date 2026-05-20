@@ -48,6 +48,7 @@ http://127.0.0.1:5000
 - `seed.sql` — dati iniziali
 - `templates/` — viste HTML Jinja
 - `static/style.css` — stile dell'interfaccia
+- `esercizi/01-interfaccia-flask-dom-eventi.md` — lettura guidata di DOM, route, template e form
 
 ## Variante containerizzata
 

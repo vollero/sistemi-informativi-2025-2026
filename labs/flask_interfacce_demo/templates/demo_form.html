@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="lesson">
+  <p class="eyebrow">Demo 04</p>
+  <h1>Form: dal DOM a request.form</h1>
+  <p>
+    Il submit del form genera una richiesta POST. Flask legge i valori attraverso
+    i nomi dei campi.
+  </p>
+</section>
+
+<section class="columns">
+  <form class="panel form-card" method="post">
+    <label>
+      Nome
+      <input name="nome" placeholder="es. Alice">
+    </label>
+
+    <label>
+      Ruolo
+      <select name="ruolo">
+        <option value="">Seleziona...</option>
+        <option value="amministratore">amministratore</option>
+        <option value="istruttore">istruttore</option>
+        <option value="iscritto">iscritto</option>
+      </select>
+    </label>
+
+    <label>
+      Nota
+      <textarea name="nota" rows="4" placeholder="Osservazione libera"></textarea>
+    </label>
+
+    <button class="button" type="submit">Invia form</button>
+  </form>
+
+  <div class="panel">
+    <h2>Risultato server</h2>
+    {% if errori %}
+      <ul class="errors">
+        {% for errore in errori %}
+          <li>{{ errore }}</li>
+        {% endfor %}
+      </ul>
+    {% elif risultato %}
+      <dl class="result">
+        <dt>Nome</dt>
+        <dd>{{ risultato.nome }}</dd>
+        <dt>Ruolo</dt>
+        <dd>{{ risultato.ruolo }}</dd>
+        <dt>Nota</dt>
+        <dd>{{ risultato.nota }}</dd>
+      </dl>
+    {% else %}
+      <p>Compila e invia il form per vedere i dati letti dal server.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="trace">
+  <h2>Traccia</h2>
+  <pre>&lt;input name="nome"&gt;
+  -> submit
+      -> POST /demo/04-form
+          -> request.form["nome"]</pre>
+</section>
+{% endblock %}

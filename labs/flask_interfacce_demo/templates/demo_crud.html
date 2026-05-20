@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="lesson">
+  <p class="eyebrow">Demo 06</p>
+  <h1>Mini CRUD: creare ed eliminare elementi</h1>
+  <p>
+    Questa demo usa una lista in memoria, quindi i dati si perdono al riavvio.
+    Serve solo a visualizzare il ciclo POST, modifica stato, redirect, GET.
+  </p>
+</section>
+
+<section class="columns">
+  <form class="panel form-card" method="post">
+    <h2>Nuova attivita'</h2>
+    <label>
+      Titolo
+      <input name="titolo" placeholder="es. Disegnare il form iscritti">
+    </label>
+    <label>
+      Stato
+      <select name="stato">
+        <option value="da fare">da fare</option>
+        <option value="in corso">in corso</option>
+        <option value="fatto">fatto</option>
+      </select>
+    </label>
+    <button class="button" type="submit">Crea</button>
+  </form>
+
+  <div class="panel">
+    <div class="panel-head">
+      <h2>Attivita'</h2>
+      <form method="post" action="{{ url_for('demo_crud_reset') }}">
+        <button class="ghost-button" type="submit">Reset</button>
+      </form>
+    </div>
+
+    <ul class="task-list">
+      {% for task in tasks %}
+        <li>
+          <div>
+            <strong>{{ task.titolo }}</strong>
+            <span>{{ task.stato }}</span>
+          </div>
+          <form method="post" action="{{ url_for('demo_crud_delete', task_id=task.id) }}">
+            <button class="danger-button" type="submit">Elimina</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section class="trace">
+  <h2>Pattern Post/Redirect/Get</h2>
+  <pre>POST crea attivita'
+  -> aggiorna lista in memoria
+      -> redirect
+          -> GET pagina aggiornata</pre>
+</section>
+{% endblock %}

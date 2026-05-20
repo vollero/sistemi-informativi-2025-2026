@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">Laboratorio introduttivo</p>
+  <h1>Sei demo progressive per leggere una interfaccia Flask</h1>
+  <p>
+    Ogni demo isola un concetto: pagina, template, componente, form, evento e
+    CRUD. L'obiettivo e' imparare a seguire il percorso da oggetto grafico a
+    codice Python.
+  </p>
+</section>
+
+<section class="demo-grid">
+  {% for codice, titolo, descrizione, link in demo %}
+    <a class="demo-card" href="{{ link }}">
+      <span>{{ codice }}</span>
+      <h2>{{ titolo }}</h2>
+      <p>{{ descrizione }}</p>
+    </a>
+  {% endfor %}
+</section>
+{% endblock %}

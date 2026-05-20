@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title or "Demo Flask Interfacce" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <header class="shell-header">
+      <a class="brand" href="{{ url_for('index') }}">Demo Flask</a>
+      <nav>
+        <a href="{{ url_for('demo_pagina_statica') }}">01</a>
+        <a href="{{ url_for('demo_template') }}">02</a>
+        <a href="{{ url_for('demo_componenti') }}">03</a>
+        <a href="{{ url_for('demo_form') }}">04</a>
+        <a href="{{ url_for('demo_eventi') }}">05</a>
+        <a href="{{ url_for('demo_crud') }}">06</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <section class="messages">
+            {% for category, message in messages %}
+              <p class="message {{ category }}">{{ message }}</p>
+            {% endfor %}
+          </section>
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

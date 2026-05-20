@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="lesson">
+  <p class="eyebrow">Demo 03</p>
+  <h1>Componenti grafici: mappare visuale e codice</h1>
+  <p>
+    Una interfaccia e' fatta di oggetti riconoscibili. Ogni oggetto ha una
+    rappresentazione HTML e una responsabilita' nell'interazione.
+  </p>
+</section>
+
+<section class="component-board">
+  {% for componente in componenti %}
+    <article class="component-card">
+      <h2>{{ componente.nome }}</h2>
+      <code>{{ componente.html }}</code>
+      <p>{{ componente.ruolo }}</p>
+    </article>
+  {% endfor %}
+</section>
+
+<section class="panel">
+  <h2>Domanda guida</h2>
+  <p>
+    Quando guardi una pagina, chiediti sempre: quale tag produce questo oggetto?
+    Quale evento puo' generare? Quale route Flask verra' chiamata?
+  </p>
+</section>
+{% endblock %}

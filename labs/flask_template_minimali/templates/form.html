@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-title">
+  <p class="eyebrow">Template 05</p>
+  <h1>{{ titolo_pagina }}</h1>
+  <p>Un form raccoglie valori e li invia alla route Flask con metodo POST.</p>
+</section>
+
+{% if errori %}
+  <section class="messages">
+    {% for errore in errori %}
+      <p class="message error">{{ errore }}</p>
+    {% endfor %}
+  </section>
+{% endif %}
+
+<form class="panel form" method="post" action="{{ azione }}">
+  <label>
+    Titolo
+    <input name="titolo" value="{{ progetto.titolo }}" placeholder="Titolo del progetto">
+  </label>
+
+  <label>
+    Categoria
+    <input name="categoria" value="{{ progetto.categoria }}" placeholder="es. sport, biblioteca, università">
+  </label>
+
+  <label>
+    Stato
+    <select name="stato">
+      {% for stato in ["idea", "bozza", "in corso", "fatto"] %}
+        <option value="{{ stato }}" {% if progetto.stato == stato %}selected{% endif %}>{{ stato }}</option>
+      {% endfor %}
+    </select>
+  </label>
+
+  <label>
+    Descrizione
+    <textarea name="descrizione" rows="5" placeholder="Descrizione breve">{{ progetto.descrizione }}</textarea>
+  </label>
+
+  <div class="actions">
+    <button class="button" type="submit">Salva</button>
+    <a class="button secondary" href="{{ url_for('lista_progetti') }}">Annulla</a>
+  </div>
+</form>
+{% endblock %}

@@ -20,6 +20,8 @@ Università Campus Bio-Medico di Roma (UCBM) — A.A. 2025/2026
   - `palestra_repl/` — Applicazione REPL a ruoli sul dominio palestra
   - `palestra_web/` — Applicazione web Flask a ruoli sul dominio palestra
   - `palestra_containerizzata/` — Versione Docker con PostgreSQL, web e REPL
+  - `flask_interfacce_demo/` — Demo progressive di interfacce web con Flask
+  - `flask_template_minimali/` — Template Flask semplici e riutilizzabili
   - `rubrica_oop/` — Progetto CRUD rubrica telefonica (OOP + persistenza JSON)
 
 ## Strumenti Utilizzati
@@ -47,6 +49,7 @@ Università Campus Bio-Medico di Roma (UCBM) — A.A. 2025/2026
 - [Modifiche dati in SQL: INSERT, UPDATE, DELETE e vincoli](docs/sql/modifiche-dati-sql-e-vincoli.pdf)
 - [Guida ai comandi SQL e alle transazioni](docs/sql/guida-comandi-sql-e-transazioni.pdf)
 - [Architettura dei laboratori: REPL, web e parti intercambiabili](docs/laboratori/architettura-laboratori-repl-web.pdf)
+- [Sviluppo di interfacce web con Flask](docs/laboratori/flask-interfacce-web-introduzione.pdf)
 - [Mini prova 01: tabelle, join e modello relazionale](docs/esoneri/prova-01-tabelle-join-modello-relazionale.pdf)
 - [Mini prova 02: SQL di base e vincoli](docs/esoneri/prova-02-sql-query-e-modifiche-dati.pdf)
 - [Esercitazione: modellazione base dati per schede di allenamento](docs/esoneri/esercitazione-modellazione-schede-allenamento.pdf)
@@ -60,3 +63,4 @@ Università Campus Bio-Medico di Roma (UCBM) — A.A. 2025/2026
 - [Lucidi 06: modifiche dati in SQL](docs/slides/06-modifiche-dati-sql-e-vincoli.pdf)
 - [Lucidi 07: architettura dei laboratori REPL e web](docs/slides/07-architettura-laboratori-repl-web.pdf)
 - [Lucidi 08: guida ai comandi SQL e transazioni](docs/slides/08-guida-comandi-sql-e-transazioni.pdf)
+- [Lucidi 09: sviluppo di interfacce web con Flask](docs/slides/09-flask-interfacce-web.pdf)

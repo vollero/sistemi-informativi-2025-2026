@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-title">
+  <p class="eyebrow">Template 02</p>
+  <h1>Dashboard</h1>
+  <p>Una dashboard riassume pochi indicatori e mostra gli ultimi record utili.</p>
+</section>
+
+<section class="stats">
+  {% for etichetta, valore in statistiche %}
+    <article class="stat">
+      <strong>{{ valore }}</strong>
+      <span>{{ etichetta }}</span>
+    </article>
+  {% endfor %}
+</section>
+
+<section class="panel">
+  <h2>Record recenti</h2>
+  <ul class="list">
+    {% for progetto in recenti %}
+      <li>
+        <div>
+          <strong>{{ progetto.titolo }}</strong>
+          <span>{{ progetto.categoria }} · {{ progetto.stato }}</span>
+        </div>
+        <a href="{{ url_for('dettaglio_progetto', progetto_id=progetto.id) }}">Apri</a>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endblock %}

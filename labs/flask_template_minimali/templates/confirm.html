@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-title">
+  <p class="eyebrow">Template 06</p>
+  <h1>Conferma eliminazione</h1>
+  <p>Una pagina di conferma evita cancellazioni involontarie.</p>
+</section>
+
+<section class="panel">
+  <p>Vuoi eliminare il progetto <strong>{{ progetto.titolo }}</strong>?</p>
+  <form method="post" action="{{ url_for('elimina_progetto', progetto_id=progetto.id) }}">
+    <div class="actions">
+      <button class="button danger" type="submit">Elimina</button>
+      <a class="button secondary" href="{{ url_for('dettaglio_progetto', progetto_id=progetto.id) }}">Annulla</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

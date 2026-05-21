@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-title">
+  <p class="eyebrow">Template 03</p>
+  <h1>Lista record</h1>
+  <p>Una lista permette di leggere più record e scegliere un'azione.</p>
+  <a class="button" href="{{ url_for('nuovo_progetto') }}">Nuovo progetto</a>
+</section>
+
+{% if progetti %}
+  <section class="panel">
+    <table>
+      <thead>
+        <tr>
+          <th>Titolo</th>
+          <th>Categoria</th>
+          <th>Stato</th>
+          <th>Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for progetto in progetti %}
+          <tr>
+            <td>{{ progetto.titolo }}</td>
+            <td>{{ progetto.categoria }}</td>
+            <td><span class="badge">{{ progetto.stato }}</span></td>
+            <td>
+              <a href="{{ url_for('dettaglio_progetto', progetto_id=progetto.id) }}">dettaglio</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% else %}
+  <section class="empty">
+    <h2>Nessun record</h2>
+    <p>La lista è vuota. Crea il primo record per iniziare.</p>
+    <a class="button" href="{{ url_for('nuovo_progetto') }}">Crea record</a>
+  </section>
+{% endif %}
+{% endblock %}

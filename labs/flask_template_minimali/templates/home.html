@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">Template 01</p>
+  <h1>Home page semplice</h1>
+  <p>
+    Questa pagina può essere usata come ingresso dell'applicazione. Contiene un
+    titolo, una breve descrizione e poche azioni principali.
+  </p>
+  <div class="actions">
+    <a class="button" href="{{ url_for('lista_progetti') }}">Vai alla lista</a>
+    <a class="button secondary" href="{{ url_for('nuovo_progetto') }}">Crea record</a>
+  </div>
+</section>
+
+<section class="cards">
+  <article class="card">
+    <span class="number">{{ statistiche.progetti }}</span>
+    <h2>Progetti</h2>
+    <p>Numero totale di record mostrati dalla mini-app.</p>
+  </article>
+  <article class="card">
+    <span class="number">{{ statistiche.in_corso }}</span>
+    <h2>In corso</h2>
+    <p>Record che rappresentano lavoro attivo.</p>
+  </article>
+  <article class="card">
+    <span class="number">{{ statistiche.fatti }}</span>
+    <h2>Completati</h2>
+    <p>Record con stato finale.</p>
+  </article>
+</section>
+{% endblock %}

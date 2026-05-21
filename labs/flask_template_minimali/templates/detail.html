@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-title">
+  <p class="eyebrow">Template 04</p>
+  <h1>{{ progetto.titolo }}</h1>
+  <p>Una pagina dettaglio mostra un singolo record e le azioni disponibili.</p>
+</section>
+
+<section class="panel">
+  <dl class="details">
+    <dt>Categoria</dt>
+    <dd>{{ progetto.categoria }}</dd>
+    <dt>Stato</dt>
+    <dd>{{ progetto.stato }}</dd>
+    <dt>Descrizione</dt>
+    <dd>{{ progetto.descrizione }}</dd>
+  </dl>
+
+  <div class="actions">
+    <a class="button" href="{{ url_for('modifica_progetto', progetto_id=progetto.id) }}">Modifica</a>
+    <a class="button danger" href="{{ url_for('conferma_eliminazione', progetto_id=progetto.id) }}">Elimina</a>
+    <a class="button secondary" href="{{ url_for('lista_progetti') }}">Torna alla lista</a>
+  </div>
+</section>
+{% endblock %}
